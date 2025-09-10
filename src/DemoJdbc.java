@@ -19,7 +19,7 @@ public class DemoJdbc {
         String uname = "postgres";
         String pass = "Raghav@1234";
 
-        String query = "select sname from student where sid = 1;";
+        String query = "select * from student;";
 
         //Class.forName("org.postgresql.Driver");
 
@@ -38,6 +38,12 @@ public class DemoJdbc {
 //        String name = rs.getString("sname"); // I am specifying which column I want to display
 //
 //        System.out.println("Name of a student is "+name);
+
+        while(rs.next()){ // it will put a pointer to the next row also check if next row is available
+            System.out.print(rs.getInt(1)+" - ");
+            System.out.print(rs.getString(2)+" - ");
+            System.out.println(rs.getInt(3)+" - ");
+        }
 
         con.close();
 

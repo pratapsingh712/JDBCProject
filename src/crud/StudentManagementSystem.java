@@ -9,10 +9,12 @@ public class StudentManagementSystem {
         String url = "jdbc:postgresql://localhost:5432/studentManagement";
         String uname = "postgres";
         String pass = "Raghav@1234";
-//        String insertQuery = "INSERT INTO Student (sid, sname, marks)\n" +
-//                "VALUES (2, 'John', 65);";
+        String insertQuery = "INSERT INTO Student (sid, sname, marks)\n" +
+                "VALUES (2, 'John', 65);";
 
         String update = "update student set sname = 'max' where sid = 2";
+
+        String delete = "delete from student where sid = 2";
 
         Class.forName("org.postgresql.Driver");
 
@@ -33,6 +35,8 @@ public class StudentManagementSystem {
             System.out.println(rs.getInt(3));
         }
 
+        System.out.println("--------------------------------------------------------------------");
+
         System.out.println("Let's update the name of id = 2:");
         System.out.println("after updating :");
 
@@ -44,6 +48,21 @@ public class StudentManagementSystem {
             System.out.print(rs1.getInt(1) + " - ");
             System.out.print(rs1.getString(2) + " - ");
             System.out.println(rs1.getInt(3));
+        }
+
+        System.out.println("--------------------------------------------------------------------");
+
+        System.out.println("let's delete the max row :");
+        System.out.println("After deleting the max row :");
+
+        st.execute(delete);
+
+        ResultSet deleted = st.executeQuery("select * from student");
+
+        while(deleted.next()){
+            System.out.print(deleted.getInt(1) + " - ");
+            System.out.print(deleted.getString(2) + " - ");
+            System.out.println(deleted.getInt(3));
         }
 
         con.close();

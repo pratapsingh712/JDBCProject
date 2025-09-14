@@ -1,4 +1,4 @@
-import org.postgresql.Driver;
+package basicJdbc;
 
 import java.sql.*;
 

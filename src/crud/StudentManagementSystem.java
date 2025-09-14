@@ -9,8 +9,10 @@ public class StudentManagementSystem {
         String url = "jdbc:postgresql://localhost:5432/studentManagement";
         String uname = "postgres";
         String pass = "Raghav@1234";
-        String insertQuery = "INSERT INTO Students (StudentID, FirstName, LastName, Age)\n" +
-                "VALUES (1, 'John', 'Doe', 20);";
+//        String insertQuery = "INSERT INTO Student (sid, sname, marks)\n" +
+//                "VALUES (2, 'John', 65);";
+
+        String update = "update student set sname = 'max' where sid = 2";
 
         Class.forName("org.postgresql.Driver");
 
@@ -19,17 +21,31 @@ public class StudentManagementSystem {
 
         Statement st = con.createStatement();
 
-        //boolean data_Inserted = st.execute("insert into student values(1,'Raghav',100);");
+        //boolean data_Inserted = st.execute(insertQuery); //
 
-       // System.out.println("Data Inserted:"+data_Inserted);
+        //System.out.println("Data Inserted:"+data_Inserted);
 
         ResultSet rs = st.executeQuery("select * from student");
 
         while(rs.next()) {
             System.out.print(rs.getInt(1) + " - ");
             System.out.print(rs.getString(2) + " - ");
-            System.out.println(rs.getInt(3) + " - ");
+            System.out.println(rs.getInt(3));
         }
+
+        System.out.println("Let's update the name of id = 2:");
+        System.out.println("after updating :");
+
+        st.execute(update);
+
+        ResultSet rs1 = st.executeQuery("select * from student");
+
+        while(rs1.next()){
+            System.out.print(rs1.getInt(1) + " - ");
+            System.out.print(rs1.getString(2) + " - ");
+            System.out.println(rs1.getInt(3));
+        }
+
         con.close();
 
         System.out.println("connection closed :");
